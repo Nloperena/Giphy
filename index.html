@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="buttonHolder">
+        <button class="animalButton" id="dog" onclick="sendAjax()">dog</button>;
+        <button class="animalButton" id="cat" onclick="sendAjax()">cat</button>;
+        <button class="animalButton" id="bear" onclick="sendAjax()">bear</button>;
+        <button class="animalButton" id="lion" onclick="sendAjax()">lion</button>;
+        <button class="animalButton" id="cheetah" onclick="sendAjax()">cheetah</button>;
+        <button class="animalButton" id="deer" onclick="sendAjax()">deer</button>;
+        <button class="animalButton" id="sugarGlider" onclick="sendAjax()">sugar glider</button>;
+        <button class="animalButton" id="hedgehog" onclick="sendAjax()">hedgehog</button>;
+        <button class="animalButton" id="pig" onclick="sendAjax()">pig</button>;
+        <button class="animalButton" id="koala" onclick="sendAjax()">koala</button>;
+    </div>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var queryURL = "http://api.giphy.com/v1/gifs/animal?q=search&api_key=KnR1AgiUUekQjWjjqyV4gQwosujXiGJv"
+
+
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            JSON(queryURL, gifData)
+
+            gifData (function(data){
+            print(data)
+        })
+
+        })
+        
+        
+        
+    </script>
+</body>
+
+</html>gifData (function(data) {
+print(data)
+}
