@@ -21,7 +21,8 @@
         <button class="animalButton" id="hedgehog" onclick="sendAjax()">hedgehog</button>
         <button class="animalButton" id="pig" onclick="sendAjax()">pig</button>
         <button class="animalButton" id="koala" onclick="sendAjax()">koala</button>
-    </div>
+        <div id="ratingView"><!-- ratings append here</div> --></div>
+        <div id="animalView"><!-- images append here</div> --></div>
 
 
 
@@ -39,6 +40,7 @@
 
 
 
+       for(j= 0; j <10; j++) {
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -46,23 +48,32 @@
             console.log(aJaxData)
             var results = aJaxData.data
 
-            for (var i = 0; i < results.length; i++)
+            for (var i = 0; i < results.length; i++) {
 
-            var animalDiv = $("<div>")
-            var animalRating = results[i].rating
-            var animalP =$("<p>").text("rating: "+ animalRating)
-            var animalImg = $("<img>").addClass("giphy")
+                var animalDiv = $("<div>")
+                var animalRating = results[i].rating
+                var animalP = $("<p>").text("rating: " + animalRating)
+                    animalDiv.append(animalP)
+                var animalImg = $("<img>").addClass("giphy")
+                    animalDiv.append(animalImg)
 
+                animalImg.attr("data-state", "still");
+                animalImg.attr("data-still", results[i].images.fixed_height_still.url);
+                animalImg.attr("src", results[i].images.fixed_height_still.url);
+                animalImg.attr("data-animate", results[i].images.fixed_height.url);
+               
+                
+            }
+            
+            $("#manimalView").prepend(animalDiv)
+            $("#ratingView").prepend(animalDiv)
 
-
-
-
-            // animalImg.attr("data-state", "still");
-            // animalImg.attr("data-still", results[i].images.fixed_height_still.url);
-            // animalImg.attr("src", results[i].images.fixed_height_still.url);
-            // animalImg.attr("data-animate", results[i].images.fixed_height.url);
 
         });
+
+       }
+
+
     </script>
 </body>
 
