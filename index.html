@@ -11,70 +11,110 @@
 
 <body>
     <div class="buttonHolder">
-        <button class="animalButton" id="dog" onclick="sendAjax()">dog</button>
+        <!-- <button class="animalButton" id="dog" onclick="sendAjax()">dog</button>
         <button class="animalButton" id="cat" onclick="sendAjax()">cat</button>
         <button class="animalButton" id="bear" onclick="sendAjax()">bear</button>
         <button class="animalButton" id="lion" onclick="sendAjax()">lion</button>
         <button class="animalButton" id="cheetah" onclick="sendAjax()">cheetah</button>
         <button class="animalButton" id="deer" onclick="sendAjax()">deer</button>
-        <button class="animalButton" id="sugarGlider" onclick="sendAjax()">sugar glider</button>
+        
         <button class="animalButton" id="hedgehog" onclick="sendAjax()">hedgehog</button>
         <button class="animalButton" id="pig" onclick="sendAjax()">pig</button>
-        <button class="animalButton" id="koala" onclick="sendAjax()">koala</button>
-        <div id="ratingView"><!-- ratings append here</div> --></div>
-        <div id="animalView"><!-- images append here</div> --></div>
+        <button class="animalButton" id="koala" onclick="sendAjax()">koala</button> -->
+        <form id="animal-form">
+            <label for="animal-input">Find an animal</label>
+            <input type="text" id="animal-input">
+            <br>
+            <input id="add-animal" type="submit" value="Find an animal">
+        </form>
+
+
+        <div id="ratingView">
+            <!-- ratings append here</div> -->
+        </div>
+        <div id="animalView">
+            <!-- images append here</div> -->
+        </div>
 
 
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(document).on("click", ".animalButton", function () {
-            console.log("clicked")
-            var hi = $(this).attr("data-name");
-            console.log(hi)
-        })
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).on("click", ".animalButton", function () {
+                console.log("clicked")
+                var hi = $(this).attr("data-name");
+                console.log(hi)
+            })
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=dog&api_key=KnR1AgiUUekQjWjjqyV4gQwosujXiGJv"
+            // var animals = $(this).attr("data-name")
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=animals&api_key=KnR1AgiUUekQjWjjqyV4gQwosujXiGJv"
 
 
 
-       for(j= 0; j <10; j++) {
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (aJaxData) {
-            console.log(aJaxData)
-            var results = aJaxData.data
+            // animals = ["dog", "cat", "bear", "lion", "cheetah", "deer", "hedgehog", "pig", "koala"]
 
-            for (var i = 0; i < results.length; i++) {
 
-                var animalDiv = $("<div>")
-                var animalRating = results[i].rating
-                var animalP = $("<p>").text("rating: " + animalRating)
+
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (aJaxData) {
+                console.log(aJaxData)
+                var results = aJaxData.data
+
+                for (var i = 0; i < 10; i++) {
+
+                    var animalDiv = $("<div>")
+                    var animalRating = results[i].rating
+                    var animalP = $("<p>").text("rating: " + animalRating)
                     animalDiv.append(animalP)
-                var animalImg = $("<img>").addClass("giphy")
+                    var animalImg = $("<img>").addClass("giphy")
                     animalDiv.append(animalImg)
 
-                animalImg.attr("data-state", "still");
-                animalImg.attr("data-still", results[i].images.fixed_height_still.url);
-                animalImg.attr("src", results[i].images.fixed_height_still.url);
-                animalImg.attr("data-animate", results[i].images.fixed_height.url);
-               
-                
-            }
-            
-            $("#manimalView").prepend(animalDiv)
-            $("#ratingView").prepend(animalDiv)
+                    // animalImg.attr("data-state", "still");
+                    // animalImg.attr("data-still", results[i].images.fixed_height_still.url);
+                    animalImg.attr("src", results[i].images.fixed_height_still.url);
+                    // animalImg.attr("data-animate", results[i].images.fixed_height.url);
+
+                    $("#animalView").append(animalDiv)
+                    $("#ratingView").append(animalDiv)
+                }
+            })
+
+            $("#add-animal").on("click", function (event) {
+                event.preventDefault();
+                // This line grabs the input from the textbox
+                var animals = $("#animal-input").val().trim();
+
+                // Adding movie from the textbox to our array
+                // movies.push(movie);
+
+                // // Calling renderButtons which handles the processing of our movie array
+                // renderButtons();
+            });
+
+            // Adding a click event listener to all elements with a class of "movie-btn"
+            // $(document).on("click", ".movie-btn", displayMovieInfo);
+
+            // Calling the renderButtons function to display the intial buttons
+            // renderButtons();
 
 
-        });
+            //     // $("#add-animal").on("click", function(event) {
+            //     // event.preventDefault();
+            //     // This line grabs the input from the textbox
+            //     var animals = $("#animal-input").val().trim();
 
-       }
+            //     // Adding movie from the textbox to our array
+            //     results.push(animals);
 
-
-    </script>
+            //     // Calling renderButtons which handles the processing of our movie array
+            //    }
+        </script>
 </body>
 
 </html>
