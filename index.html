@@ -43,9 +43,26 @@
             url: queryURL,
             method: "GET"
         }).then(function (aJaxData) {
-            console.log(aJaxdata)
+            console.log(aJaxData)
             var results = aJaxData.data
-        })
+
+            for (var i = 0; i < results.length; i++)
+
+            var animalDiv = $("<div>")
+            var animalRating = results[i].rating
+            var animalP =$("<p>").text("rating: "+ animalRating)
+            var animalImg = $("<img>").addClass("giphy")
+
+
+
+
+
+            // animalImg.attr("data-state", "still");
+            // animalImg.attr("data-still", results[i].images.fixed_height_still.url);
+            // animalImg.attr("src", results[i].images.fixed_height_still.url);
+            // animalImg.attr("data-animate", results[i].images.fixed_height.url);
+
+        });
     </script>
 </body>
 
